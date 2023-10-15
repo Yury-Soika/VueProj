@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MyButton from './UI/MyButton.vue'
-import type { Post } from '@/pages/PostsPage.vue'
+import MyButton from '@/UI/MyButton.vue'
+import type { Post } from '@/modules/constants/index.ts'
 defineProps<{
   post: Post
 }>()

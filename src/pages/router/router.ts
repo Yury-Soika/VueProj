@@ -1,23 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainPage from '@/pages/MainPage.vue'
-import PostsPage from '@/pages/PostsPage.vue'
-import PostPage from '@/pages/PostPage.vue'
+import { defineAsyncComponent } from 'vue'
 
 const routes = [
   {
     path: '/',
     name: 'MainPage',
-    component: MainPage
+    component: defineAsyncComponent(() => import('@/pages/MainPage.vue'))
   },
   {
     path: '/posts',
     name: 'PostsPage',
-    component: PostsPage
+    component: defineAsyncComponent(() => import('@/pages/PostsPage.vue'))
   },
   {
     path: '/posts/:id',
     name: 'PostPage',
-    component: PostPage
+    component: defineAsyncComponent(() => import('@/pages/PostPage.vue'))
   }
 ]
 

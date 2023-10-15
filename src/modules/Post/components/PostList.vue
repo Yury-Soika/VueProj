@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Post } from '@/pages/PostsPage.vue'
 import PostItem from './PostItem.vue'
 defineProps<{
   posts: Post[]
