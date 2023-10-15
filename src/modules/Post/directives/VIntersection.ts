@@ -1,7 +1,7 @@
-import { usePostStore } from '@/stores/PostStore'
+import { usePostStore } from '@/modules/Post/stores/PostStore'
 
 export const vIntersection = {
-  mounted: (el: any, binding: any) => {
+  mounted: (el: Element, binding: { value: () => any }) => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       const postStore = usePostStore()
 
@@ -13,5 +13,5 @@ export const vIntersection = {
     const observer = new IntersectionObserver(handleIntersection)
     observer.observe(el)
   },
-  name: 'intersecrion'
+  name: 'intersection'
 }

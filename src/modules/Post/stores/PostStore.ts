@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import type { Post } from '@/pages/PostsPage.vue'
+import type { Post } from '@/modules/Post/constants'
 
 export const limit = 10
 const postsUrl = 'https://jsonplaceholder.typicode.com/posts'
@@ -12,14 +12,29 @@ export const usePostStore = defineStore('postStore', () => {
   const isPostsLoading = ref(true)
   const page = ref(1)
   const totalPages = ref(0)
-  const selectedSort = ref('')
+  const selectedSort = ref<keyof Post>('id')
   const searchQuery = ref('')
 
-  const sortedPosts = computed(() =>
-    [...posts.value].sort((post1: any, post2: any) => {
-      return post1[selectedSort.value]?.localeCompare(post2[selectedSort.value])
+  const sortedPosts = computed(() => {
+    if (!selectedSort.value) {
+      return [...posts.value]
+    }
+
+    return [...posts.value].sort((post1: Post, post2: Post) => {
+      const value1 = post1[selectedSort.value]
+      const value2 = post2[selectedSort.value]
+
+      if (typeof value1 === 'string' && typeof value2 === 'string') {
+        return value1.localeCompare(value2)
+      }
+
+      if (typeof value1 === 'number' && typeof value2 === 'number') {
+        return value1 - value2
+      }
+
+      return 0 // Default case if types are not string or number
     })
-  )
+  })
 
   const sortedAndSearchedPosts = computed(() =>
     sortedPosts.value.filter((post) =>
