@@ -2,8 +2,11 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from '@/App.vue'
-import router from './pages/router/router'
+import router from '@/router'
 import directives from '@/modules/Post/directives'
+import { fakeBackend } from '@/helpers/fakeBackend'
+
+fakeBackend()
 
 const app = createApp(App)
 
